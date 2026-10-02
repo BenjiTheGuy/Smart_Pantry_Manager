@@ -26,6 +26,14 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".RecipesActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

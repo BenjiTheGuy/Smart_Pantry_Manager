@@ -81,14 +81,17 @@ The database will also support all CRUD operations needed for management of the 
 
 ## Application Screens
 
-The planned application will contain the following screens:
+The application is being developed incrementally. It currently contains the following screens which have been created:
 
 1. **Welcome Screen**
 2. **Pantry Screen**
-3. **Add/Edit Ingredient Screen**
-4. **Suggested Recipes Screen**
-5. **Recipe Detail Screen**
-6. **Settings Screen**
+3. **Recipes Screen**
+4. **Settings Screen**
+
+The following screens will be implemented as development progresses.
+
+5. **Add/Edit Ingredient Screen**
+6. **Recipe Detail Screen**
 
 ## Project Structure
 
@@ -107,6 +110,8 @@ Current Activities include:
 
 - `WelcomeActivity` - Initial Application Screen
 - `MainActivity` - Main Pantry Screen
+- `RecipesActivity` - Recipes Screen
+- `SettingsActivity` - Settings Screen
 
 Additional Activities will be added as development progresses.
 
@@ -116,7 +121,7 @@ Additional Activities will be added as development progresses.
 
 - Android Studio
 - Java Development Kit (JDK)
-- Android Emulator or Compatible Android Device
+- Android Emulator or Compatible Android Device 
 - Git
 
 ### Running the Application

@@ -1,24 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@android:color/white"
     tools:context=".MainActivity">
 
     <!-- App Title -->
     <TextView
-        android:id="@+id/sp_title"
+        android:id="@+id/p_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="20dp"
         android:text="@string/app_name"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textStyle="bold|italic"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@id/p_heading"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Heading -->
+    <TextView
+        android:id="@+id/p_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:padding="20dp"
+        android:text="@string/pantry_heading"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        app:layout_constraintTop_toBottomOf="@id/p_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Temporary Empty-State Message -->
+    <TextView
+        android:id="@+id/p_empty_pantry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="@string/empty_pantry_message"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/p_heading" />
+
+    <!-- Add Ingredient Button -->
+    <Button
+        android:id="@+id/add_ingredient"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="@string/add_ingredient"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/p_empty_pantry" />
+
+    <!-- Linear Layout used for Navigation -->
+    <LinearLayout
+        android:id="@+id/sp_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Pantry Button -->
+        <Button
+            android:id="@+id/nav_pantry"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/nav_pantry" />
+
+        <!-- Recipes Button -->
+        <Button
+            android:id="@+id/nav_recipes"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/nav_recipes" />
+
+        <!-- Settings Button -->
+        <Button
+            android:id="@+id/nav_settings"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/nav_settings" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,19 @@
 <resources>
+    <!-- Application Name -->
     <string name="app_name">Smart Pantry</string>
 
     <!-- Welcome Screen -->
     <string name="welcome_subtitle">Reduce Waste. Use What You Have.</string>
     <string name="welcome_description">Find Recipes Using Only The Ingredients Currently Available In Your Pantry.</string>
     <string name="get_started">Get Started</string>
+
+    <!-- Pantry Screen -->
+    <string name="pantry_heading">My Pantry</string>
+    <string name="empty_pantry_message">Your Pantry is empty.\nAdd Ingredients to get started.</string>
+    <string name="add_ingredient">Add Ingredient</string>
+
+    <!-- Navigation Buttons -->
+    <string name="nav_pantry">Pantry</string>
+    <string name="nav_recipes">Recipes</string>
+    <string name="nav_settings">Settings</string>
 </resources>
