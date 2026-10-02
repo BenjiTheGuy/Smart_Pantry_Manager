@@ -1,7 +1,7 @@
 # Smart Pantry Manager
 
 ## Overview
-Smart Pantry Manager is a Java-Based Application designed to help reduce food waste by allowing for users to keep track of the ingredients they currently have available.
+Smart Pantry Manager is a Java-Based Android Application designed to help reduce food waste by allowing for users to keep track of the ingredients they currently have available.
 
 The application heavily involves suggesting recipes based strictly on the ingredients made available within the user's pantry. A recipe is only suggested to the user if they have sufficient ingredients in the required quantities needed to make the recipe.
 
@@ -83,11 +83,12 @@ The database will also support all CRUD operations needed for management of the 
 
 The planned application will contain the following screens:
 
-1. **Pantry Screen**
-2. **Add/Edit Ingredient Screen**
-3. **Suggested Recipes Screen**
-4. **Recipe Detail Screen**
-5. **Settings Screen**
+1. **Welcome Screen**
+2. **Pantry Screen**
+3. **Add/Edit Ingredient Screen**
+4. **Suggested Recipes Screen**
+5. **Recipe Detail Screen**
+6. **Settings Screen**
 
 ## Project Structure
 
@@ -102,7 +103,12 @@ The main components will include:
 - Recipe Matching and Ingredient Normalization Utilities
 - XML Layouts and Android Resources
 
-The final project structure will be documented here as development progresses.
+Current Activities include:
+
+- `WelcomeActivity` - Initial Application Screen
+- `MainActivity` - Main Pantry Screen
+
+Additional Activities will be added as development progresses.
 
 ## Installation and Setup
 
@@ -127,11 +133,11 @@ Setup instructions will be updated if additional configuration is required durin
 
 Git is used throughout the development of Smart Pantry Manager
 
-The project is hosted on GitHub and development will be tracked through incremenetal commits.
+The project is hosted on GitHub and development will be tracked through incremental commits.
 
 ## GitHub Repository
 **Repository**
-[https://github.com/BenjiTheGuy/Smart_Pantry_Manager]
+[Smart Pantry Manager GitHub Repository](https://github.com/BenjiTheGuy/Smart_Pantry_Manager)
 
 ## Author
 

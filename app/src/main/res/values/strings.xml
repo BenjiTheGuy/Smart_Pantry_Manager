@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">SmartPantryManager</string>
+    <string name="app_name">Smart Pantry</string>
+
+    <!-- Welcome Screen -->
+    <string name="welcome_subtitle">Reduce Waste. Use What You Have.</string>
+    <string name="welcome_description">Find Recipes Using Only The Ingredients Currently Available In Your Pantry.</string>
+    <string name="get_started">Get Started</string>
 </resources>
