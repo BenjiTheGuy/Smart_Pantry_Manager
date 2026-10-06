@@ -16,4 +16,11 @@
     <string name="nav_pantry">Pantry</string>
     <string name="nav_recipes">Recipes</string>
     <string name="nav_settings">Settings</string>
+
+    <!-- Add/Edit Ingredient Screen -->
+    <string name="add_ingredient_title">Add Ingredient</string>
+    <string name="add_ingredient_name">Ingredient Name</string>
+    <string name="add_ingredient_quantity">Quantity</string>
+    <string name="add_ingredient_expiry_date">Select Expiry Date</string>
+    <string name="save_ingredient">Save Ingredient</string>
 </resources>

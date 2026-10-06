@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Linear Layout used for Navigation -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <!-- Pantry Button -->
+    <Button
+        android:id="@+id/nav_pantry"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:text="@string/nav_pantry" />
+
+    <!-- Recipes Button -->
+    <Button
+        android:id="@+id/nav_recipes"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:text="@string/nav_recipes" />
+
+    <!-- Settings Button -->
+    <Button
+        android:id="@+id/nav_settings"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:text="@string/nav_settings" />
+
+</LinearLayout>

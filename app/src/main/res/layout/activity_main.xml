@@ -60,42 +60,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/p_empty_pantry" />
 
-    <!-- Linear Layout used for Navigation -->
-    <LinearLayout
-        android:id="@+id/sp_bottom_navigation"
-        android:layout_width="match_parent"
+    <!-- Navigation Fragment -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_navigation"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <!-- Pantry Button -->
-        <Button
-            android:id="@+id/nav_pantry"
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="@string/nav_pantry" />
-
-        <!-- Recipes Button -->
-        <Button
-            android:id="@+id/nav_recipes"
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="@string/nav_recipes" />
-
-        <!-- Settings Button -->
-        <Button
-            android:id="@+id/nav_settings"
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="@string/nav_settings" />
-
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -63,7 +63,7 @@ The application will include a settings/profile screen for application preferenc
 - **Database:** SQLite
 - **UI:** Android XML Layouts
 - **Lists:** RecyclerView
-- **Navigation:** Android Activities and Intents
+- **Navigation:** Android Activities, Intents, and a reusable NavigationFragment
 - **Version Control:** Git and GitHub
 
 ## Database
@@ -88,6 +88,8 @@ The application is being developed incrementally. It currently contains the foll
 3. **Recipes Screen**
 4. **Settings Screen**
 
+A reusable `NavigationFragment` has been implemented to provide navigation between the Pantry, Recipes, and Settings Screens.
+
 The following screens will be implemented as development progresses.
 
 5. **Add/Edit Ingredient Screen**
@@ -100,6 +102,7 @@ The project structure will be developed incrementally throughout the project.
 The main components will include:
 
 - Activities for Application Screens
+- Fragments for reusable UI Components
 - Model classes for Application Data
 - SQLite Database Classes
 - RecyclerView Adapters
@@ -112,6 +115,10 @@ Current Activities include:
 - `MainActivity` - Main Pantry Screen
 - `RecipesActivity` - Recipes Screen
 - `SettingsActivity` - Settings Screen
+
+Current Fragment includes:
+
+- `NavigationFragment` - Reusable navigation bar used by the Pantry, Recipes, and Settings Activity Screens.
 
 Additional Activities will be added as development progresses.
 
