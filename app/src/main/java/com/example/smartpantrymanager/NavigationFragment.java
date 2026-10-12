@@ -1,5 +1,6 @@
 package com.example.smartpantrymanager;
 
+// Importing necessary libraries to implement class.
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -103,6 +104,11 @@ public class NavigationFragment extends Fragment {
             } else {
                 // Explicit Intent used to open up the next Activity, which is the Recipes Screen.
                 Intent intent = new Intent(requireActivity(), RecipesActivity.class);
+
+                intent.putExtra(
+                        "recipe_name",
+                        "Chicken Curry"
+                );
 
                 // Starting the Recipes Screen using the Intent.
                 startActivity(intent);

@@ -9,14 +9,79 @@
     android:background="@android:color/white"
     tools:context=".AddEditIngredientActivity" >
 
+    <!-- Screen Title -->
     <TextView
         android:id="@+id/aei_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_ingredient"
+        android:text="@string/add_ingredient_title"
         android:textSize="26sp"
         android:textStyle="bold"
+        android:textColor="@android:color/black"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Ingredient Name Input -->
+    <EditText
+        android:id="@+id/aei_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="@string/add_ingredient_name"
+        android:textColor="@android:color/black"
+        android:inputType="textCapWords"
+        android:singleLine="true"
+        app:layout_constraintTop_toBottomOf="@+id/aei_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Ingredient Quantity Input -->
+    <EditText
+        android:id="@+id/aei_quantity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/add_ingredient_quantity"
+        android:textColor="@android:color/black"
+        android:inputType="numberDecimal"
+        android:singleLine="true"
+        app:layout_constraintTop_toBottomOf="@+id/aei_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Ingredient Unit Dropdown -->
+    <Spinner
+        android:id="@+id/aei_unit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@android:color/black"
+        android:entries="@array/measurement_units"
+        android:contentDescription="@string/ingredient_unit"
+        app:layout_constraintTop_toBottomOf="@id/aei_quantity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Optional Expiry Date Button -->
+    <Button
+        android:id="@+id/aei_expiry_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/add_ingredient_expiry_date"
+        app:layout_constraintTop_toBottomOf="@id/aei_unit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/aei_save"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/save_ingredient"
+        app:layout_constraintTop_toBottomOf="@id/aei_expiry_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

@@ -3,6 +3,7 @@ package com.example.smartpantrymanager;
 // Importing libraries required to run the class.
 import android.os.Bundle;
 import android.widget.Button;
+import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +23,15 @@ public class MainActivity extends AppCompatActivity {
 
         // Linking the Java Button Variables to the buttons defined in the XML Layout.
         btnAddIngredient = findViewById(R.id.add_ingredient);
+
+        // OnClick Listener used to open up the Activity which is the Add / Edit Screen.
+        btnAddIngredient.setOnClickListener(v -> {
+            // Intent used to open up the activity.
+            Intent intent = new Intent(MainActivity.this, AddEditIngredientActivity.class);
+
+            // Starting Activity.
+            startActivity(intent);
+        });
 
         // Checking if this is the first time the Activity is being created.
         if (savedInstanceState == null) {
