@@ -3,17 +3,13 @@ package com.example.smartpantrymanager;
 // Importing necessary libraries to implement class.
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.TextView;
-import android.content.Intent;
 import android.app.DatePickerDialog;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.Spinner;
-import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
+import android.database.Cursor;
 
 // Importing date and number-handling classes.
 import java.util.Calendar;
@@ -29,8 +25,15 @@ public class AddEditIngredientActivity extends AppCompatActivity {
     private Button btnExpiryDate;
     private Button btnSave;
 
+    // Database helper used to save or update pantry ingredients
+    private DatabaseHelper databaseHelper;
+
     // Storing the selected expiry date.
     private String expiryDate = "";
+
+    // Storing the ID of the ingredient being edited.
+    // A value of -1 means a new ingredient is being added.
+    private int ingredientId = -1;
 
     // Overridden Lifecycle method to start up the Add/Edit Activity.
     @Override
@@ -47,6 +50,17 @@ public class AddEditIngredientActivity extends AppCompatActivity {
         spinUnit = findViewById(R.id.aei_unit);
         btnExpiryDate = findViewById(R.id.aei_expiry_date);
         btnSave = findViewById(R.id.aei_save);
+
+        // Initializing the database helper
+        databaseHelper = new DatabaseHelper(this);
+
+        // Checking whether an existing ingredient ID was passed to this screen.
+        ingredientId = getIntent().getIntExtra("ingredient_id", -1);
+
+        if (ingredientId != - 1) {
+            // Existing ingredient method used to load its details into the form.
+            loadIngredientForEditing();
+        }
 
         // Opening the date picket when the expiry button is pressed.
         btnExpiryDate.setOnClickListener(v -> {
@@ -154,11 +168,8 @@ public class AddEditIngredientActivity extends AppCompatActivity {
             return;
         }
 
-        // Creating an instance of the database helper
-        DatabaseHelper dbHelper = new DatabaseHelper(this);
-
-        // Opening the database for writing
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        // Creating an instance of the database helper for writing
+        SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
         // Preparing the ingredient details for insertion.
         ContentValues values = new ContentValues();
@@ -173,34 +184,103 @@ public class AddEditIngredientActivity extends AppCompatActivity {
             values.put(DatabaseHelper.COLUMN_EXPIRY_DATE, expiryDate);
         }
 
-        // Inserting the ingredient into the pantry table and returns the row ID.
-        long result = db.insert(
-                DatabaseHelper.TABLE_PANTRY,
-                null,
-                values
-        );
+        long result;
 
-        // Closing the database helper
-        dbHelper.close();
+        if (ingredientId == -1) {
+            // Inserting the ingredient into the pantry table and returns the row ID.
+            result = db.insert(
+                    DatabaseHelper.TABLE_PANTRY,
+                    null,
+                    values
+            );
+        } else {
+            // Editing option used to update the existing pantry ingredient.
+            result = databaseHelper.updatePantryItem(
+                    ingredientId,
+                    ingredientName,
+                    quantity,
+                    unit,
+                    expiryDate
+            );
+        }
 
-        // Checking whether the ingredient was saved successfully by validating the row number.
-        if (result != 1) {
-            // Displaying a success message to the user
+        boolean success = ingredientId == -1 ? result != -1 : result > 0;
+
+        if (success) {
             Toast.makeText(
                     this,
-                    "Ingredient Saved Successfully",
+                    ingredientId == -1
+                            ? "Ingredient Saved Successfully"
+                            : "Ingredient Updated Successfully",
                     Toast.LENGTH_SHORT
             ).show();
 
-            // Returning to the Pantry Screen
+            // Returning to the Pantry screen.
             finish();
         } else {
-            // Informing the user that the ingredients couldn't be saved.
             Toast.makeText(
                     this,
-                    "Failed to Save Ingredient",
+                    ingredientId == -1
+                            ? "Failed to Save Ingredient"
+                            : "Failed to Update Ingredient",
                     Toast.LENGTH_SHORT
             ).show();
         }
+    }
+
+    // Loading the selected ingredient's saved details into the form.
+    private void loadIngredientForEditing() {
+        SQLiteDatabase database = databaseHelper.getReadableDatabase();
+
+        Cursor cursor = database.query(
+                DatabaseHelper.TABLE_PANTRY,
+                null,
+                DatabaseHelper.COLUMN_ID + " = ?",
+                new String[]{String.valueOf(ingredientId)},
+                null,
+                null,
+                null
+        );
+
+        if (cursor.moveToFirst()) {
+            // Retrieving the saved ingredient details
+            String name = cursor.getString(
+                    cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_NAME)
+            );
+
+            double quantity = cursor.getDouble(
+                    cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_QUANTITY)
+            );
+
+            String unit = cursor.getString(
+                    cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_UNIT)
+            );
+
+            String savedExpiryDate = cursor.getString(
+                    cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_EXPIRY_DATE)
+            );
+
+            // Populating the form with the existing values.
+            editIngredientName.setText(name);
+            editQuantity.setText(String.valueOf(quantity));
+
+            // Selecting the saved measurement unit
+            for (int i = 0; i < spinUnit.getCount(); i++) {
+                if (spinUnit.getItemAtPosition(i).toString().equals(unit)) {
+                    spinUnit.setSelection(i);
+
+                    break;
+                }
+            }
+
+            // Restoring the expiry date if one exists
+            if (savedExpiryDate != null && !savedExpiryDate.isEmpty()) {
+                expiryDate = savedExpiryDate;
+
+                btnExpiryDate.setText(savedExpiryDate);
+            }
+        }
+
+        cursor.close();
     }
 }

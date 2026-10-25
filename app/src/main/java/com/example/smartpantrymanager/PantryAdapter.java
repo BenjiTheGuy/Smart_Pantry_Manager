@@ -20,8 +20,9 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
     private final List<PantryItem> pantryItems;
 
     // Constructor receives the ingredients to display.
-    public PantryAdapter(List<PantryItem> pantryItems) {
+    public PantryAdapter(List<PantryItem> pantryItems, OnItemClickListener listener) {
         this.pantryItems = pantryItems;
+        this.listener = listener;
     }
 
     // Creating a ViewHolder for an ingredient row.
@@ -60,9 +61,13 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
         } else {
             holder.txtExpiry.setVisibility(View.VISIBLE);
             holder.txtExpiry.setText(
-                    "Expiry: " + item.getExpiryDate()
+                    "Expiry Date: " + item.getExpiryDate()
             );
         }
+
+        holder.itemView.setOnClickListener(v ->
+            listener.onItemClick(pantryItems.get(position))
+        );
     }
 
     // Returning the number of ingredients in the list.
@@ -86,4 +91,12 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
             txtExpiry = itemView.findViewById(R.id.item_ingredient_expiry);
         }
     }
+
+    // Defining what happens when a pantry ingredient is selected.
+    public interface OnItemClickListener {
+        void onItemClick(PantryItem item);
+    }
+
+    // Storing the action to perform when an ingredient is clicked.
+    private final OnItemClickListener listener;
 }

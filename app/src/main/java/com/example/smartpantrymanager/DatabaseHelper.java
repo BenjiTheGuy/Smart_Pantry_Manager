@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.Cursor;
+import android.content.ContentValues;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,4 +115,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Returning the retrieved ingredients.
         return pantryItems;
     }
+
+    // Updating an existing pantry ingredient using its database ID
+    public int updatePantryItem(
+            int id,
+            String name,
+            double quantity,
+            String unit,
+            String expiryDate) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME, name);
+        values.put(COLUMN_QUANTITY, quantity);
+        values.put(COLUMN_UNIT, unit);
+
+        if (expiryDate == null || expiryDate.isEmpty()) {
+            values.putNull(COLUMN_EXPIRY_DATE);
+        } else {
+            values.put(COLUMN_EXPIRY_DATE, expiryDate);
+        }
+
+        // Updating only the pantry item matching the supplied ID.
+        return db.update(
+                TABLE_PANTRY,
+                values,
+                COLUMN_ID +  " = ?",
+                new String[]{String.valueOf(id)}
+        );
+    };
 }

@@ -85,10 +85,18 @@ public class MainActivity extends AppCompatActivity {
         // Retrieving all saved ingredients from SQLite
         List<PantryItem> pantryItems = databaseHelper.getAllPantryItems();
 
-        // Creating an adapter using the retrieved ingredients
-        PantryAdapter adapter = new PantryAdapter(pantryItems);
+        // Creating an adapter using the retrieved ingredients.
+        PantryAdapter adapter = new PantryAdapter(pantryItems, item -> {
+            // Opening the Add/Edit Ingredient Screen.
+            Intent intent = new Intent(MainActivity.this, AddEditIngredientActivity.class);
 
-        // Connecting the adapter to the RecyclerView
+            // Passing the selected ingredient's database ID.
+            intent.putExtra("ingredient_id", item.getId());
+
+            startActivity(intent);
+        });
+
+        // Connecting the adapter to the RecyclerView and displaying the pantry ingredients.
         rvPantry.setAdapter(adapter);
 
         // Checking whether the pantry contains any ingredients
