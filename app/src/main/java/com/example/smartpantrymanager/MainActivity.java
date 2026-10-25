@@ -1,13 +1,17 @@
 package com.example.smartpantrymanager;
 
 // Importing libraries required to run the class.
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.Button;
 import android.content.Intent;
 import android.widget.TextView;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -86,15 +90,22 @@ public class MainActivity extends AppCompatActivity {
         List<PantryItem> pantryItems = databaseHelper.getAllPantryItems();
 
         // Creating an adapter using the retrieved ingredients.
-        PantryAdapter adapter = new PantryAdapter(pantryItems, item -> {
-            // Opening the Add/Edit Ingredient Screen.
-            Intent intent = new Intent(MainActivity.this, AddEditIngredientActivity.class);
+        PantryAdapter adapter = new PantryAdapter(pantryItems,
+                item -> {
+                    // Opening the Add/Edit Ingredient Screen.
+                    Intent intent = new Intent(
+                            MainActivity.this,
+                            AddEditIngredientActivity.class);
 
-            // Passing the selected ingredient's database ID.
-            intent.putExtra("ingredient_id", item.getId());
+                    // Passing the selected ingredient's database ID.
+                    intent.putExtra("ingredient_id", item.getId());
 
-            startActivity(intent);
-        });
+                    // Starting the Add/Edit Screen.
+                    startActivity(intent);
+                },
+                // Long pressing asks the user if they want to confirm deletion of the ingredient.
+                item -> showDeleteConfirmation(item)
+        );
 
         // Connecting the adapter to the RecyclerView and displaying the pantry ingredients.
         rvPantry.setAdapter(adapter);
@@ -113,5 +124,48 @@ public class MainActivity extends AppCompatActivity {
             // Showing the ingredient list.
             rvPantry.setVisibility(View.VISIBLE);
         }
+    }
+
+    // Displaying a confirmation dialog before deleting an ingredient.
+    private void showDeleteConfirmation(PantryItem item) {
+        // Creating the builder object.
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // Setting the parameters of the builder dialog.
+        builder.setTitle("Delete Ingredient")
+                .setMessage("Are you sure you want to delete " + item.getName() + "?")
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Deleting the selected ingredient from SQLite.
+                        int rowsDeleted = databaseHelper.deletePantryItem(item.getId());
+
+                        if (rowsDeleted > 0) {
+                            Toast.makeText(
+                                    MainActivity.this,
+                                    "Ingredient Deleted Successfully",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+
+                            // Closing the Confirmation dialog
+                            dialogInterface.dismiss();
+
+                            // Refreshing the pantry list.
+                            loadPantryItems();
+                        } else {
+                            Toast.makeText(
+                                    MainActivity.this,
+                                    "Failed to Delete Ingredient",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                        }
+                    }
+                })
+                .setNegativeButton("Cancel", null);
+
+        // Creating and displaying the Dialog.
+        AlertDialog alertDialog = builder.create();
+
+        alertDialog.show();
     }
 }

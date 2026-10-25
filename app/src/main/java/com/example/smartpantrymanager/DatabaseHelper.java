@@ -144,4 +144,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(id)}
         );
     };
+
+    // Deleting an ingredient from the Pantry by using its database ID.
+    public int deletePantryItem(int id) {
+        // Opening the database for writing
+        SQLiteDatabase db = getWritableDatabase();
+
+        // Deleting only the ingredient matching the supplied ID.
+        return db.delete(
+                TABLE_PANTRY,
+                COLUMN_ID + " = ?",
+                new String[]{String.valueOf(id)}
+        );
+    }
 }

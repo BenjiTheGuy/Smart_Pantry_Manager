@@ -22,13 +22,17 @@ The main objectives of the application are to address the following:
 
 ### Pantry Management
 
-Users will be able to:
+Users can:
 - Add ingredients to their pantry.
 - Edit existing ingredients.
-- Delete ingredients.
-- View all current pantry items.
-- Record ingredient quantities and units.
+- Delete ingredients with a confirmation dialog.
+- View all current pantry items using a RecyclerView with a custom Adapter.
+- Record ingredient names, quantities and measurement units.
 - Record expiry dates.
+- Store pantry information persistently using SQLite.
+- Validate ingredient inputs before saving changes.
+
+The pantry supports the core CRUD Operations through the application's database layer.
 
 ### Recipe Suggestions
 

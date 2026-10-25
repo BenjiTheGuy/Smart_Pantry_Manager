@@ -19,10 +19,13 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
     // List containing the pantry ingredients.
     private final List<PantryItem> pantryItems;
 
-    // Constructor receives the ingredients to display.
-    public PantryAdapter(List<PantryItem> pantryItems, OnItemClickListener listener) {
+    // Constructor receives the ingredients to display, to edit and to delete.
+    public PantryAdapter(List<PantryItem> pantryItems,
+                         OnItemClickListener listener,
+                         OnItemDeleteListener deleteListener) {
         this.pantryItems = pantryItems;
         this.listener = listener;
+        this.deleteListener = deleteListener;
     }
 
     // Creating a ViewHolder for an ingredient row.
@@ -65,9 +68,18 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
             );
         }
 
+        // Opening the selected ingredient by redirecting to Add/Edit Ingredient screen when the row
+        // is clicked.
         holder.itemView.setOnClickListener(v ->
             listener.onItemClick(pantryItems.get(position))
         );
+
+        // Allowing for the user to long press an ingredient in order to delete it.
+        holder.itemView.setOnLongClickListener(v -> {
+            deleteListener.onItemDelete(pantryItems.get(position));
+
+            return true;
+        });
     }
 
     // Returning the number of ingredients in the list.
@@ -97,6 +109,14 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
         void onItemClick(PantryItem item);
     }
 
+    // Defining the action to perform when an ingredient is deleted.
+    public interface OnItemDeleteListener {
+        void onItemDelete(PantryItem item);
+    }
+
     // Storing the action to perform when an ingredient is clicked.
     private final OnItemClickListener listener;
+
+    // Storing the action to perform when an ingredient is deleted.
+    private final OnItemDeleteListener deleteListener;
 }
