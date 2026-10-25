@@ -62,7 +62,7 @@ The application will include a settings/profile screen for application preferenc
 - **IDE:** Android Studio
 - **Database:** SQLite
 - **UI:** Android XML Layouts
-- **Lists:** RecyclerView
+- **Lists:** RecyclerView with a custom Adapter
 - **Navigation:** Android Activities, Intents, and a reusable NavigationFragment
 - **Version Control:** Git and GitHub
 
@@ -77,7 +77,11 @@ The Database Structure will contain the following:
 - `recipes` - Stores recipe information.
 - `recipe_ingredients` - Stores the ingredients and quantities required by each recipe.
 
-The database will also support all CRUD operations needed for management of the pantry.
+The database is managed through a custom DatabaseHelper class that extends SQLiteOpenHelper.
+
+The current pantry implementation supports inserting ingredients and retrieving stored pantry items. Additional database operations will be implemented as development progresses.
+
+SQLite was selected because it provides local database storage without requiring an external database server or an internet connection.
 
 ## Application Screens
 
@@ -85,15 +89,11 @@ The application is being developed incrementally. It currently contains the foll
 
 1. **Welcome Screen**
 2. **Pantry Screen**
-3. **Recipes Screen**
-4. **Settings Screen**
+3. **Add/Edit Ingredient Screen**
+4. **Recipes Screen**
+5. **Settings Screen**
 
 A reusable `NavigationFragment` has been implemented to provide navigation between the Pantry, Recipes, and Settings Screens.
-
-The following screens will be implemented as development progresses.
-
-5. **Add/Edit Ingredient Screen**
-6. **Recipe Detail Screen**
 
 ## Project Structure
 
@@ -112,13 +112,21 @@ The main components will include:
 Current Activities include:
 
 - `WelcomeActivity` - Initial Application Screen
-- `MainActivity` - Main Pantry Screen
+- `MainActivity` - Main Pantry Screen, responsible for displaying stored ingredients
+- `AddEditIngredientActivity` - Handles ingredient input and validation
 - `RecipesActivity` - Recipes Screen
 - `SettingsActivity` - Settings Screen
 
 Current Fragment includes:
 
 - `NavigationFragment` - Reusable navigation bar used by the Pantry, Recipes, and Settings Activity Screens.
+
+Current Database and Model Components
+
+- `DatabaseHelper` - Creates and manages the SQLite database and provides methods for storing and retrieving pantry ingredients
+- `PantryItem` - Model class representing a pantry ingredient
+- `PantryAdapter` - Custom RecyclerView adapter used to display pantry ingredients
+- `item_pantry.xml` - Layout defining how an individual pantry ingredient is displayed
 
 Additional Activities will be added as development progresses.
 
@@ -145,7 +153,7 @@ Setup instructions will be updated if additional configuration is required durin
 
 Git is used throughout the development of Smart Pantry Manager
 
-The project is hosted on GitHub and development will be tracked through incremental commits.
+The project is hosted on GitHub and development will be tracked through incremental commits documenting the implmentation of individual features.
 
 ## GitHub Repository
 **Repository**

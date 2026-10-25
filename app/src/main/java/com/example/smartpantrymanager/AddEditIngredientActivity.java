@@ -10,6 +10,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.Spinner;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 // Importing date and number-handling classes.
 import java.util.Calendar;
@@ -130,6 +134,18 @@ public class AddEditIngredientActivity extends AppCompatActivity {
             return;
         }
 
+        // Checking and determining whether the user selected an expiry date.
+        if (btnExpiryDate.getText().toString().equals("Select Expiry Date")) {
+            Toast.makeText(
+                    this,
+                    "Please select an expiry date",
+                    Toast.LENGTH_SHORT
+            ).show();
+
+            // Stopping the ingredient from being saved.
+            return;
+        }
+
         // Rejecting any values that are either zero, negative, infinite and non-values.
         if (!Double.isFinite(quantity) || quantity <= 0) {
             editQuantity.setError("Quantity must be greater than zero.");
@@ -138,19 +154,53 @@ public class AddEditIngredientActivity extends AppCompatActivity {
             return;
         }
 
-        // Confirming the form values to validate the functionality behind the input validation.
-        String message = "Ingredient Details Validated: " + ingredientName + ", " +
-                quantity + " " + unit;
+        // Creating an instance of the database helper
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
 
-        Toast.makeText(
-                AddEditIngredientActivity.this,
-                message,
-                Toast.LENGTH_SHORT
-        ).show();
+        // Opening the database for writing
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        // Returning to the Pantry Screen after successful validation. It's also at this stage where
-        // the database will save these details into a new record or perform the necessary SQL
-        // queries to update the record.
-        finish();
+        // Preparing the ingredient details for insertion.
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.COLUMN_NAME, ingredientName);
+        values.put(DatabaseHelper.COLUMN_QUANTITY, quantity);
+        values.put(DatabaseHelper.COLUMN_UNIT, unit);
+
+        // Saving the Expiry Date only when it has been selected.
+        if (expiryDate.isEmpty()) {
+            values.putNull(DatabaseHelper.COLUMN_EXPIRY_DATE);
+        } else {
+            values.put(DatabaseHelper.COLUMN_EXPIRY_DATE, expiryDate);
+        }
+
+        // Inserting the ingredient into the pantry table and returns the row ID.
+        long result = db.insert(
+                DatabaseHelper.TABLE_PANTRY,
+                null,
+                values
+        );
+
+        // Closing the database helper
+        dbHelper.close();
+
+        // Checking whether the ingredient was saved successfully by validating the row number.
+        if (result != 1) {
+            // Displaying a success message to the user
+            Toast.makeText(
+                    this,
+                    "Ingredient Saved Successfully",
+                    Toast.LENGTH_SHORT
+            ).show();
+
+            // Returning to the Pantry Screen
+            finish();
+        } else {
+            // Informing the user that the ingredients couldn't be saved.
+            Toast.makeText(
+                    this,
+                    "Failed to Save Ingredient",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
     }
 }

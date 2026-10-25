@@ -122,7 +122,7 @@ public class NavigationFragment extends Fragment {
                 // Toast Message to display to the user that they are currently on the page.
                 Toast.makeText(
                         requireContext(),
-                        "You are currently on the Recipes Page.",
+                        "You are currently on the Settings Page.",
                         Toast.LENGTH_SHORT
                 ).show();
             } else {

@@ -38,29 +38,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- List displaying saved pantry ingredients -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_pantry"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/p_heading"
+        app:layout_constraintBottom_toTopOf="@id/add_ingredient"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <!-- Temporary Empty-State Message -->
     <TextView
         android:id="@+id/p_empty_pantry"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:gravity="center"
+        android:padding="16dp"
         android:text="@string/empty_pantry_message"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/p_heading" />
+        app:layout_constraintTop_toTopOf="@id/rv_pantry"
+        app:layout_constraintBottom_toBottomOf="@id/rv_pantry"
+        app:layout_constraintStart_toStartOf="@id/rv_pantry"
+        app:layout_constraintEnd_toEndOf="@id/rv_pantry" />
 
     <!-- Add Ingredient Button -->
     <Button
         android:id="@+id/add_ingredient"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/add_ingredient"
+        app:layout_constraintBottom_toTopOf="@id/fragment_navigation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/p_empty_pantry" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Navigation Fragment -->
     <androidx.fragment.app.FragmentContainerView
