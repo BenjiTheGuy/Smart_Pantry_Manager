@@ -14,7 +14,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Declaring the database name and version
     private static final String DATABASE_NAME = "smart_pantry.db";
     // Database version increments as changes are made to it and to preserve any existing data found.
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 5;
 
     // Declaring the Pantry table name
     public static final String TABLE_PANTRY = "pantry_items";
@@ -117,6 +117,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         if (oldVersion < 3) {
+            seededRecipes(db);
+        }
+
+        if (oldVersion < 4) {
+            // Removing old recipe data only.
+            db.delete("recipe_ingredients", null, null);
+            db.delete("recipes", null, null);
+
+            // Inserting the updated recipes using your current seed method.
+            seededRecipes(db);
+        }
+
+        if (oldVersion < 5) {
+            // Removing old recipe data only.
+            db.delete("recipe_ingredients", null, null);
+            db.delete("recipes", null, null);
+
+            // Inserting the updated recipes using your current seed method.
             seededRecipes(db);
         }
     }
@@ -275,10 +293,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "Mix the flour, milk, eggs and sugar. Pour pancake mix as portions" +
                         " onto a hot pan and cook both sides.",
                 new String[][]{
-                        {"Flour", "1", "cups"},
-                        {"Milk", "1", "cups"},
+                        {"Flour", "50", "g"},
+                        {"Milk", "240", "ml"},
                         {"Eggs", "3", "pieces"},
-                        {"Sugar", "2", "tbsp"}
+                        {"Sugar", "25", "g"}
                 });
 
         // Recipe 2
@@ -287,10 +305,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "pancake mix as portions onto a hot pan and cook both sides.",
                 new String[][]{
                         {"Bananas", "2", "pieces"},
-                        {"Flour", "1", "cups"},
-                        {"Milk", "1", "cups"},
+                        {"Flour", "120", "g"},
+                        {"Milk", "250", "ml"},
                         {"Eggs", "3", "pieces"},
-                        {"Sugar", "2", "tbsp"}
+                        {"Sugar", "25", "g"}
                 });
 
         // Recipe 3
@@ -302,8 +320,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         {"Bread", "2", "pieces"},
                         {"Eggs", "2", "pieces"},
                         {"Milk", "30", "ml"},
-                        {"Butter", "5", "g"},
-                        {"Salt", "1", "tsp"}
+                        {"Butter", "50", "g"},
+                        {"Salt", "6", "g"}
                 });
 
         // Recipe 4
@@ -314,7 +332,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         {"Pasta", "200", "g"},
                         {"Milk", "100", "ml"},
                         {"Cheese", "50", "g"},
-                        {"Salt", "1", "tsp"}
+                        {"Salt", "6", "g"}
                 });
 
         // Recipe 5
@@ -330,13 +348,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Recipe 6
         insertRecipe(db, "Full English Breakfast",
                 "Prepare bread slices for toasting, cut onion slices and grill until " +
-                        " golden brown, boil sweet potatoes, fry eggs and sausages with oil.",
+                        "golden brown, boil sweet potatoes, fry eggs and sausages with oil.",
                 new String[][]{
                         {"Bread", "2", "pieces"},
-                        {"Onion", "1", "piece"},
-                        {"Oil", "1", "tbsp"},
+                        {"Onion", "150", "g"},
+                        {"Oil", "15", "ml"},
                         {"Eggs", "2", "pieces"},
-                        {"Sweet Potatoes", "2", "pieces"},
+                        {"Sweet Potatoes", "600", "g"},
                         {"Sausages", "2", "pieces"}
                 });
 
@@ -345,7 +363,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "Layer onto bread slices, slices of tomato and cheese. Toast if wanted.",
                 new String[][]{
                         {"Bread", "2", "pieces"},
-                        {"Tomato", "1", "pieces"},
+                        {"Tomato", "150", "g"},
                         {"Cheese", "40", "g"}
                 });
 
@@ -354,10 +372,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "Cook the rice, scramble the eggs, and then stir-fry the mix with salt " +
                         "and oil until golden brown.",
                 new String[][]{
-                        {"Rice", "2", "cups"},
+                        {"Rice", "307", "g"},
                         {"Eggs", "2", "pieces"},
-                        {"Oil", "2", "tbsp"},
-                        {"Salt", "2", "tsp"}
+                        {"Oil", "30", "ml"},
+                        {"Salt", "12", "g"}
                 });
 
         // Recipe 9
@@ -368,8 +386,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[][]{
                         {"Pasta", "200", "g"},
                         {"Mince", "200", "g"},
-                        {"Salt", "2", "tsp"},
-                        {"Oil", "2", "tbsp"}
+                        {"Salt", "12", "g"},
+                        {"Oil", "30", "ml"}
                 });
 
         // Recipe 10
@@ -380,8 +398,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[][]{
                         {"Chicken", "0.5", "kg"},
                         {"Pasta", "200", "g"},
-                        {"Salt", "2", "tsp"},
-                        {"Oil", "2", "tbsp"}
+                        {"Salt", "12", "g"},
+                        {"Oil", "30", "ml"}
                 });
 
         // Recipe 11
@@ -391,10 +409,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "and rice together. Mix well",
                 new String[][]{
                         {"Chicken", "0.5", "kg"},
-                        {"Rice", "2", "cups"},
-                        {"Salt", "2", "tsp"},
-                        {"Oil", "2", "tbsp"},
-                        {"Sweet Potatoes", "3", "pieces"}
+                        {"Rice", "370", "g"},
+                        {"Salt", "12", "g"},
+                        {"Oil", "30", "ml"},
+                        {"Sweet Potatoes", "600", "g"}
                 });
 
         // Recipe 12
@@ -405,7 +423,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[][]{
                         {"Eggs", "3", "pieces"},
                         {"Milk", "100", "ml"},
-                        {"Salt", "2", "tsp"},
+                        {"Salt", "12", "g"},
                         {"Bread", "5", "pieces"}
                 });
 
@@ -414,10 +432,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "Blend fresh basil, garlic, Parmesan cheese, olive oil, and peanuts " +
                         "until a smooth pesto is formed. Add this pesto onto cooked pasta.",
                 new String[][]{
-                        {"Basil", "2", "cups"},
+                        {"Basil", "40", "g"},
                         {"Garlic", "2", "pieces"},
                         {"Parmesan Cheese", "50", "g"},
-                        {"Olive Oil", "0.5", "cups"},
+                        {"Olive Oil", "120", "ml"},
                         {"Peanuts", "25", "g"}
                 });
 
@@ -427,11 +445,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         " potatoes, carrots, tomatoes and water. Simmer until beef and vegetables" +
                         " are firm and tender.",
                 new String[][]{
-                        {"Beef", "0.5", "kg"},
-                        {"Potatoes", "0.3", "kg"},
-                        {"Carrots", "0.3", "kg"},
-                        {"Tomatoes", "2", "pieces"},
-                        {"Salt", "1", "tsp"}
+                        {"Beef", "5", "kg"},
+                        {"Potatoes", "300", "g"},
+                        {"Carrots", "300", "g"},
+                        {"Tomatoes", "300", "g"},
+                        {"Salt", "6", "g"}
                 });
 
         // Recipe 15
@@ -440,10 +458,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "then roast them together with the chicken until fully cooked.",
                 new String[][]{
                         {"Chicken", "1", "kg"},
-                        {"Potatoes", "0.5", "kg"},
-                        {"Carrots", "0.25", "kg"},
-                        {"Oil", "2", "tbsp"},
-                        {"Salt", "1", "tsp"}
+                        {"Potatoes", "500", "g"},
+                        {"Carrots", "250", "g"},
+                        {"Oil", "30", "ml"},
+                        {"Salt", "6", "g"}
                 });
     }
     // Retrieving all recipes stored in the database.
@@ -544,6 +562,75 @@ public class DatabaseHelper extends SQLiteOpenHelper {
              cursor.close();
         }
         // Returning the complete ingredients list.
+        return ingredients;
+    }
+
+    // Retrieving structured ingredient objects for recipe matching.
+    public List<RecipeIngredient> getRecipeIngredientDetails(int recipeId) {
+        // Creating a list to hold the recipe's ingredient objects.
+        List<RecipeIngredient> ingredients = new ArrayList<>();
+
+        // Opening the database for reading
+        SQLiteDatabase db = getReadableDatabase();
+
+        // Retrieving each ingredient's ID, recipe ID, name, quantity and unit.
+        Cursor cursor = db.query(
+                TABLE_RECIPE_INGREDIENTS,
+                new String[] {
+                        COLUMN_RECIPE_INGREDIENT_ID,
+                        COLUMN_RECIPE_FOREIGN_ID,
+                        COLUMN_INGREDIENT_NAME,
+                        COLUMN_REQUIRED_QUANTITY,
+                        COLUMN_REQUIRED_UNIT
+                },
+                COLUMN_RECIPE_FOREIGN_ID + " = ?",
+                new String[]{String.valueOf(recipeId)},
+                null,
+                null,
+                COLUMN_INGREDIENT_NAME + " ASC"
+        );
+
+        try {
+            // Reading each ingredient returned by the database query.
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(
+                        cursor.getColumnIndexOrThrow(COLUMN_RECIPE_INGREDIENT_ID)
+                );
+
+                int storedRecipeId = cursor.getInt(
+                        cursor.getColumnIndexOrThrow(COLUMN_RECIPE_FOREIGN_ID)
+                );
+
+                String name = cursor.getString(
+                        cursor.getColumnIndexOrThrow(COLUMN_INGREDIENT_NAME)
+                );
+
+                double quantity = cursor.getDouble(
+                        cursor.getColumnIndexOrThrow(COLUMN_REQUIRED_QUANTITY)
+                );
+
+                String unit = cursor.getString(
+                        cursor.getColumnIndexOrThrow(COLUMN_REQUIRED_UNIT)
+                );
+
+                // Creating a Recipe Ingredient object from the database row
+                RecipeIngredient ingredient = new RecipeIngredient(
+                        id,
+                        storedRecipeId,
+                        name,
+                        quantity,
+                        unit
+                );
+
+                // Adding the object to the result list.
+                ingredients.add(ingredient);
+            }
+        } finally {
+            // Closing the cursor to release database resources.
+            cursor.close();
+        }
+
+        // Returning the structured recipe ingredients.
         return ingredients;
     }
 }

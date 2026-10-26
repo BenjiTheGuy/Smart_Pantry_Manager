@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:text="@string/recipe_heading"
         android:textSize="28sp"
-        android:textStyle="bold"
+        android:textStyle="bold|italic"
         android:textColor="#222222"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +35,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Buttons for switching between recipe views -->
+    <LinearLayout
+        android:id="@+id/layout_recipe_filters"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/txt_recipes_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" >
+
+        <Button
+            android:id="@+id/btn_all_recipes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/all_recipes_button" />
+
+        <Button
+            android:id="@+id/btn_suggested_recipes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="@string/suggested_recipes_button" />
+    </LinearLayout>
+
     <!-- Message Displayed When no Recipes are Available -->
     <TextView
         android:id="@+id/txt_no_recipes"
@@ -46,7 +74,7 @@
         android:textSize="16sp"
         android:textColor="#666666"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/txt_recipes_description"
+        app:layout_constraintTop_toBottomOf="@id/layout_recipe_filters"
         app:layout_constraintBottom_toTopOf="@id/fragment_navigation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -56,10 +84,10 @@
         android:id="@+id/rv_recipes"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:clipToPadding="false"
         android:paddingBottom="12dp"
-        app:layout_constraintTop_toBottomOf="@id/txt_recipes_description"
+        app:layout_constraintTop_toBottomOf="@id/layout_recipe_filters"
         app:layout_constraintBottom_toTopOf="@id/fragment_navigation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

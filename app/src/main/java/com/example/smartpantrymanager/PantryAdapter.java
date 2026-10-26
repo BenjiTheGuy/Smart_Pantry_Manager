@@ -2,6 +2,9 @@ package com.example.smartpantrymanager;
 
 // Importing the required Android classes and libraries
 import android.view.LayoutInflater;
+import android.graphics.Color;
+import android.content.res.ColorStateList;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -17,6 +20,12 @@ import java.util.List;
 public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryViewHolder> {
     // List containing the pantry ingredients.
     private final List<PantryItem> pantryItems;
+
+    // Storing the action to perform when an ingredient is clicked.
+    private final OnItemClickListener listener;
+
+    // Storing the action to perform when an ingredient is deleted.
+    private final OnItemDeleteListener deleteListener;
 
     // Constructor receives the ingredients to display, to edit and to delete.
     public PantryAdapter(List<PantryItem> pantryItems,
@@ -57,6 +66,18 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
                 item.getQuantity() + " " + item.getUnit()
         );
 
+        // Resetting the default color to ensure that rows don't inherit the color from another
+        // ingredient
+        holder.txtName.setTextColor(holder.defaultNameTextColor);
+
+        // Applying the correct color based on the expiry date status
+        if (ExpiryDateHelper.isExpired(item.getExpiryDate())) {
+            // Red to indicate the ingredient has expired.
+            holder.txtName.setTextColor(Color.RED);
+        } else if (ExpiryDateHelper.isExpiringSoon(item.getExpiryDate())) {
+            // Yellow to indicate the ingredient is expiring soon.
+            holder.txtName.setTextColor(Color.YELLOW);
+        }
         // Displaying the expiry date when available
         if (item.getExpiryDate() == null || item.getExpiryDate().isEmpty()) {
             holder.txtExpiry.setVisibility(View.GONE);
@@ -91,6 +112,9 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
     static class PantryViewHolder extends RecyclerView.ViewHolder {
         TextView txtName, txtQuantity, txtExpiry;
 
+        // Saving the original name color for reuse
+        final ColorStateList defaultNameTextColor;
+
         // Linking the row's TextViews to their Java variables.
         public PantryViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -100,6 +124,8 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
             txtQuantity = itemView.findViewById(R.id.item_ingredient_quantity);
 
             txtExpiry = itemView.findViewById(R.id.item_ingredient_expiry);
+
+            defaultNameTextColor = txtName.getTextColors();
         }
     }
 
@@ -112,10 +138,4 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
     public interface OnItemDeleteListener {
         void onItemDelete(PantryItem item);
     }
-
-    // Storing the action to perform when an ingredient is clicked.
-    private final OnItemClickListener listener;
-
-    // Storing the action to perform when an ingredient is deleted.
-    private final OnItemDeleteListener deleteListener;
 }

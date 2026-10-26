@@ -18,7 +18,7 @@ The main objectives of the application are to address the following:
 - Allowing for users to view completed recipe ingredients and preparation instructions.
 - Providing a settings/profile screen for additional application preference.
 
-## Planned Features
+## Implemented Features
 
 ### Pantry Management
 
@@ -27,24 +27,44 @@ Users can:
 - Edit existing ingredients.
 - Delete ingredients with a confirmation dialog.
 - View all current pantry items using a RecyclerView with a custom Adapter.
-- Record ingredient names, quantities and measurement units.
-- Record expiry dates.
+- Record ingredient names, quantities and measurement units and mandatory expiry dates.
 - Store pantry information persistently using SQLite.
 - Validate ingredient inputs before saving changes.
+- Identify expired and soon to expire ingredients through color indicators.
 
 The pantry supports the core CRUD Operations through the application's database layer.
 
-### Recipe Suggestions
+### Recipe Matching & Suggestions
 
 The application will enable for users to compare their pantry against the recipe database.
+
+The Recipes Screen provides two viewing options:
+- **All Recipes:** Displays the recipes available in the application.
+- **Suggested Recipes:** Displays recipes that can be prepared using the available, non-expired pantry ingredients.
 
 A recipe will only be suggested to the user if the following conditions are met:
 
 1. Every required ingredient is made available in the pantry.
 2. The available quantity is sufficient.
-3. Ingredient names can be matched despite simple differences in wording.
+3. Ingredient names can be matched despite simple differences in wording through the IngredientNormalizer class which handles singular and plural forms of ingredients.
+4. Pantry and Recipe units must match, whilst also ignoring whitespaces and capitalization.
+5. Expired pantry stock is excluded from the available quantity.
+6. Quantities from multiple pantry entries which match in ingredient names and quantities are combined and are not expired.
+7. Every required ingredient must pass the checks before the recipe can be suggested.
 
-Recipes that are missing required ingredients are immediately not suggested to the user.
+Recipes that are missing required ingredients are immediately not suggested to the user and feedback is provided.
+
+### Expiry Management
+
+This section helps users monitor the freshness of their pantry ingredients and prevents expired stock from being used for recipe suggestions.
+
+Each pantry ingredient requires an expiry date.
+
+The application utilizes the following rules:
+
+- `Expired`: Expiry Date is before the current date and the Ingredient name is flagged as a red color and excluded from the suggested recipes.
+- `Expiring Soon`: Expiry Date is on the current date or after 3 days and the Ingredient name is flagged as a yellow color and still remains include with the suggested recipes.
+- `Fresh`: Expiry Date is more than 4 days and the Ingredient name is kept with the same color and remains included with the suggested recipes.
 
 ### Recipe Details
 
@@ -52,12 +72,12 @@ User will be able to select a suggested recipe and view:
 
 - Recipe Name
 - Required Ingredients
-- Required Quantities
+- Required Quantities and measurement units
 - Preparation Instructions
 
 ### Settings
 
-The application will include a settings/profile screen for application preferences such as expiry alerts.
+The application includes a settings/profile screen for application preferences such as expiry alerts.
 
 ## Technology Stack
 
@@ -81,7 +101,9 @@ The Database Structure will contain the following:
 - `recipes` - Stores recipe information.
 - `recipe_ingredients` - Stores the ingredients and quantities required by each recipe.
 
-The database is managed through a custom DatabaseHelper class that extends SQLiteOpenHelper.
+The database is managed through a custom DatabaseHelper class that extends SQLiteOpenHelper. It helps to manage the local storage of pantry ingredients and recipes, and even provides the data retrieval required by pantry management and recipe matching.
+
+SQLite was selected due to its persistent nature to store data without needing an external database server or an internet connection.
 
 The current pantry implementation supports inserting ingredients and retrieving stored pantry items. Additional database operations will be implemented as development progresses.
 
@@ -130,6 +152,13 @@ Current Database and Model Components
 - `DatabaseHelper` - Creates and manages the SQLite database and provides methods for storing and retrieving pantry ingredients
 - `PantryItem` - Model class representing a pantry ingredient
 - `PantryAdapter` - Custom RecyclerView adapter used to display pantry ingredients
+- `Recipe` - Model class to represent a recipe
+- `RecipeIngredient` - Represents an ingredient and quantity required by a recipe
+- `RecipeAdapter` - Custom RecyclerView adapter to displaying recipes
+- `RecipeMatcher` - Checks whether recipes can be prepared using sufficient, non expired pantry stock
+- `IngredientNormalizer` - Normalizes ingredient names for matching purposes
+- `UnitConverter` - Provides measurement unit methods
+- `ExpiryDateHelper` - Parses Expiry Dates and checks whether ingredients have expired or are expiring soon
 - `item_pantry.xml` - Layout defining how an individual pantry ingredient is displayed
 
 Additional Activities will be added as development progresses.
