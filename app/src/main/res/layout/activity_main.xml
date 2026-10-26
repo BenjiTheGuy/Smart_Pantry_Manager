@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/pantry_background"
     tools:context=".MainActivity">
 
     <!-- App Title -->
@@ -17,23 +17,39 @@
         android:text="@string/app_name"
         android:textStyle="bold|italic"
         android:textSize="28sp"
-        android:textColor="@android:color/black"
+        android:textColor="@color/pantry_green_dark"
         app:layout_constraintBottom_toTopOf="@id/p_heading"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Personal Greeting -->
+    <TextView
+        android:id="@+id/p_welcome_back"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Welcome Back!"
+        android:textColor="@color/pantry_text_secondary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/p_title"
+        app:layout_constraintBottom_toTopOf="@id/p_heading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Heading -->
     <TextView
         android:id="@+id/p_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:padding="20dp"
+        android:layout_marginTop="20dp"
+        android:paddingTop="15dp"
         android:text="@string/pantry_heading"
         android:textSize="24sp"
         android:textStyle="normal|bold"
-        android:textColor="@android:color/black"
+        android:textColor="@color/pantry_text_primary"
         app:layout_constraintTop_toBottomOf="@id/p_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -59,6 +75,7 @@
         android:gravity="center"
         android:padding="16dp"
         android:text="@string/empty_pantry_message"
+        android:textColor="@color/pantry_text_secondary"
         android:textSize="16sp"
         app:layout_constraintTop_toTopOf="@id/rv_pantry"
         app:layout_constraintBottom_toBottomOf="@id/rv_pantry"
@@ -71,7 +88,11 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/pantry_green"
         android:text="@string/add_ingredient"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/fragment_navigation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

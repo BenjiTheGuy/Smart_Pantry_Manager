@@ -36,7 +36,7 @@ The pantry supports the core CRUD Operations through the application's database 
 
 ### Recipe Matching & Suggestions
 
-The application will enable for users to compare their pantry against the recipe database.
+The application allows for users to compare their pantry against the recipe database.
 
 The Recipes Screen provides two viewing options:
 - **All Recipes:** Displays the recipes available in the application.
@@ -68,16 +68,17 @@ The application utilizes the following rules:
 
 ### Recipe Details
 
-User will be able to select a suggested recipe and view:
+User can select a suggested recipe and view:
 
 - Recipe Name
+- Meal Image
 - Required Ingredients
 - Required Quantities and measurement units
 - Preparation Instructions
 
 ### Settings
 
-The application includes a settings/profile screen for application preferences such as expiry alerts.
+The application includes a settings/profile screen for application preferences and managing user information.
 
 ## Technology Stack
 
@@ -94,30 +95,29 @@ The application includes a settings/profile screen for application preferences s
 
 SQLite is used as the application's local database.
 
-The database will provide persistent storage for pantry items and recipes, allowing for information to remain available even after the application is closed and reopened.
+The database provide persistent storage for pantry items and recipes, allowing for information to remain available even after the application is closed and reopened.
 
-The Database Structure will contain the following:
+The Database Structure contains the following:
 - `pantry_items` - Stores the ingredients currently available to the user.
 - `recipes` - Stores recipe information.
 - `recipe_ingredients` - Stores the ingredients and quantities required by each recipe.
 
 The database is managed through a custom DatabaseHelper class that extends SQLiteOpenHelper. It helps to manage the local storage of pantry ingredients and recipes, and even provides the data retrieval required by pantry management and recipe matching.
 
-SQLite was selected due to its persistent nature to store data without needing an external database server or an internet connection.
-
-The current pantry implementation supports inserting ingredients and retrieving stored pantry items. Additional database operations will be implemented as development progresses.
+The current pantry implementation supports inserting ingredients and retrieving stored pantry items.
 
 SQLite was selected because it provides local database storage without requiring an external database server or an internet connection.
 
 ## Application Screens
 
-The application is being developed incrementally. It currently contains the following screens which have been created:
+The application contains the following screens which have been created:
 
 1. **Welcome Screen**
 2. **Pantry Screen**
 3. **Add/Edit Ingredient Screen**
 4. **Recipes Screen**
-5. **Settings Screen**
+5. **Recipe Details Screen**
+6. **Settings Screen**
 
 A reusable `NavigationFragment` has been implemented to provide navigation between the Pantry, Recipes, and Settings Screens.
 
@@ -141,6 +141,7 @@ Current Activities include:
 - `MainActivity` - Main Pantry Screen, responsible for displaying stored ingredients
 - `AddEditIngredientActivity` - Handles ingredient input and validation
 - `RecipesActivity` - Recipes Screen
+- `RecipeDetailActivity` - Displays the selected recipe's ingredients, meal image, and preparation instructions.
 - `SettingsActivity` - Settings Screen
 
 Current Fragment includes:
@@ -160,8 +161,7 @@ Current Database and Model Components
 - `UnitConverter` - Provides measurement unit methods
 - `ExpiryDateHelper` - Parses Expiry Dates and checks whether ingredients have expired or are expiring soon
 - `item_pantry.xml` - Layout defining how an individual pantry ingredient is displayed
-
-Additional Activities will be added as development progresses.
+- `item_recipe.xml` - Layout defining how an individual recipe card is displayed.
 
 ## Installation and Setup
 
@@ -180,13 +180,11 @@ Additional Activities will be added as development progresses.
 4. Create or Start an Android Emulator, or Connect a Compatible Android Device.
 5. Run the Application from Android Studio
 
-Setup instructions will be updated if additional configuration is required during development.
-
 ## Version Control
 
 Git is used throughout the development of Smart Pantry Manager
 
-The project is hosted on GitHub and development will be tracked through incremental commits documenting the implmentation of individual features.
+The project is hosted on GitHub and development is tracked through incremental commits documenting the implmentation of individual features.
 
 ## GitHub Repository
 **Repository**

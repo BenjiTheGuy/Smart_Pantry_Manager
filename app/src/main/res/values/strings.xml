@@ -51,7 +51,14 @@
     <!-- Recipe Matcher Details -->
     <string name="all_recipes_button">All Recipes</string>
     <string name="suggested_recipes_button">Suggested Recipes</string>
-    <string name="suggested_recipes_empty">No recipes can be prepared with your current pantry
-    quantities. Add ingredients or update their quantities to discover new recipes.</string>
+    <string name="suggested_recipes_empty">No recipes can be prepared with your current pantry quantities. Add ingredients or update their quantities to discover new recipes.</string>
     <string name="recipes_database_empty">No recipes are available yet.</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Settings &amp; Profile</string>
+    <string name="settings_description">Manage your personal details.</string>
+    <string name="settings_save">Save Profile</string>
+    <string name="settings_about">About Smart Pantry Manager</string>
+    <string name="settings_about_description">Organize your pantry, manage ingredients, expiry dates, and discover new recipes.</string>
+    <string name="settings_version">Version 1.0</string>
 </resources>

@@ -1,37 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginBottom="12dp"
+    app:cardBackgroundColor="@color/pantry_surface"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true" >
 
-    <!-- Ingredient Name -->
-    <TextView
-        android:id="@+id/item_ingredient_name"
+    <!-- Container for ingredient information -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:text="Milk" />
+        android:orientation="vertical"
+        android:padding="18dp" >
 
-    <!-- Ingredient Quantity and Unit -->
-    <TextView
-        android:id="@+id/item_ingredient_quantity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textSize="16sp"
-        tools:text="2.0 L" />
+        <!-- Ingredient Name -->
+        <TextView
+            android:id="@+id/item_ingredient_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/pantry_green_dark"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Milk" />
 
-    <!-- Ingredient Expiry Date -->
-    <TextView
-        android:id="@+id/item_ingredient_expiry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textSize="14sp"
-        tools:text="Expiry: 2026-10-30" />
+        <!-- Ingredient Quantity and Unit -->
+        <TextView
+            android:id="@+id/item_ingredient_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/pantry_text_secondary"
+            android:textSize="16sp"
+            tools:text="2.0 L" />
 
-</LinearLayout>
+        <!-- Ingredient Expiry Date -->
+        <TextView
+            android:id="@+id/item_ingredient_expiry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/pantry_green"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="Expiry: 2026-10-30" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

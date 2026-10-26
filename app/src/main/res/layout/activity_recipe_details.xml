@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/pantry_background"
     android:fillViewport="true" >
 
     <!-- Allows the recipe details to scroll when content exceeds the screen height -->
@@ -19,8 +19,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="28sp"
-            android:textStyle="bold"
-            android:textColor="#222222" />
+            android:textStyle="bold|italic"
+            android:textColor="@color/pantry_green_dark" />
+
+        <!-- Recipe Meal Photo -->
+        <ImageView
+            android:id="@+id/img_detail_recipe"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:contentDescription="Recipe Mean Photo"
+            android:scaleType="centerCrop"
+            android:background="@color/pantry_green_light" />
 
         <!-- Heading for the recipe's required ingredients -->
         <TextView
@@ -30,7 +39,7 @@
             android:text="@string/ingredients_required"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="#222222" />
+            android:textColor="@color/pantry_green" />
 
         <!-- Displays each required ingredients with its quantity and unit -->
         <TextView
@@ -38,8 +47,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:background="@color/pantry_cream"
             android:textSize="16sp"
-            android:textColor="#444444"
+            android:textColor="@color/pantry_text_primary"
             android:lineSpacingExtra="6dp" />
 
         <!-- Heading for the recipe preparation instructions -->
@@ -50,7 +60,7 @@
             android:text="@string/ingredients_instructions"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="#222222" />
+            android:textColor="@color/pantry_green" />
 
         <!-- Displays the full preparation instructions for the selected recipe. -->
         <TextView
@@ -58,8 +68,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:background="@color/pantry_cream"
             android:textSize="16sp"
-            android:textColor="#444444"
+            android:textColor="@color/pantry_text_primary"
             android:lineSpacingExtra="6dp" />
 
     </LinearLayout>

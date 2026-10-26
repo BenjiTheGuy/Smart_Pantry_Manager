@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!-- Linear Layout used for Navigation -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center"
     android:paddingTop="10dp"
-    android:paddingBottom="10dp">
+    android:paddingBottom="10dp"
+    android:background="@color/pantry_cream" >
 
     <!-- Pantry Button -->
     <Button
@@ -15,7 +16,11 @@
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:text="@string/nav_pantry" />
+        android:text="@string/nav_pantry"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="@color/pantry_green_dark"
+        android:backgroundTint="@color/pantry_green_light" />
 
     <!-- Recipes Button -->
     <Button
@@ -23,7 +28,11 @@
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:text="@string/nav_recipes" />
+        android:text="@string/nav_recipes"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="@color/pantry_green_dark"
+        android:backgroundTint="@color/pantry_green_light" />
 
     <!-- Settings Button -->
     <Button
@@ -31,6 +40,10 @@
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:text="@string/nav_settings" />
+        android:text="@string/nav_settings"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="@color/pantry_green_dark"
+        android:backgroundTint="@color/pantry_green_light" />
 
 </LinearLayout>

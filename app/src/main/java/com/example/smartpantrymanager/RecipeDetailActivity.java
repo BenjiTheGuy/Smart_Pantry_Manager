@@ -3,6 +3,7 @@ package com.example.smartpantrymanager;
 // Importing libraries to use in file.
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,10 +24,11 @@ public class RecipeDetailActivity extends AppCompatActivity {
         // Initializing the database helper.
         databaseHelper = new DatabaseHelper(this);
 
-        // Connecting the TextViews to their layout elements.
+        // Connecting the TextViews and ImageView to their layout elements.
         TextView txtName = findViewById(R.id.txt_detail_recipe_name);
         TextView txtIngredients = findViewById(R.id.txt_detail_ingredients);
         TextView txtInstructions = findViewById(R.id.txt_detail_instructions);
+        ImageView imgRecipe = findViewById(R.id.img_detail_recipe);
 
         // Retrieving the selected recipe's information passed through the Intent.
         int recipeId = getIntent().getIntExtra("recipe_id", -1);
@@ -43,6 +45,9 @@ public class RecipeDetailActivity extends AppCompatActivity {
         // Displaying the recipe name and preparation instructions.
         txtName.setText(recipeName);
         txtInstructions.setText(recipeInstructions);
+
+        // Displaying the same meal image used in RecipeAdapter.
+        imgRecipe.setImageResource(RecipeAdapter.getRecipeImage(recipeName));
 
         // Retrieving the required ingredients for the selected recipe.
         List<String> ingredients = databaseHelper.getRecipeIngredients(recipeId);

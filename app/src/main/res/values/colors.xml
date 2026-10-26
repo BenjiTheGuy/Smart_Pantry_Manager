@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Primary Colours -->
+    <color name="pantry_green">#2E6B4F</color>
+    <color name="pantry_green_dark">#204C38</color>
+    <color name="pantry_green_light">#DCECE2</color>
+
+    <!-- Secondary Colours -->
+    <color name="pantry_sage">#A8C5AE</color>
+    <color name="pantry_cream">#F7F8F3</color>
+
+    <!-- Surfaces and Text -->
+    <color name="pantry_background">#F7F8F3</color>
+    <color name="pantry_surface">#FFFFFF</color>
+    <color name="pantry_text_secondary">#26352C</color>
+    <color name="pantry_text_primary">#68756C</color>
+    <color name="pantry_outline">#D9E2DA</color>
+
+    <!-- Ingredient Expiry Status -->
+    <color name="expiry_expired">#C62828</color>
+    <color name="expiry_soon">#A66A00</color>
+    <color name="expiry_fresh">#2E6B4F</color>
+
+    <!-- Standard Colours -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

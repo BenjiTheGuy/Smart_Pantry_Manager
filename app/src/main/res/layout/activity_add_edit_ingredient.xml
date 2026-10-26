@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    android:background="@android:color/white"
+    android:background="@color/pantry_background"
     tools:context=".AddEditIngredientActivity" >
 
     <!-- Screen Title -->
@@ -14,10 +14,11 @@
         android:id="@+id/aei_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/add_ingredient_title"
         android:textSize="26sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:textColor="@color/pantry_green_dark"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -28,8 +29,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:backgroundTint="@color/pantry_sage"
         android:hint="@string/add_ingredient_name"
-        android:textColor="@android:color/black"
+        android:textColor="@color/pantry_text_primary"
+        android:textColorHint="@color/pantry_text_secondary"
         android:inputType="textCapWords"
         android:singleLine="true"
         app:layout_constraintTop_toBottomOf="@+id/aei_title"
@@ -42,8 +45,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/pantry_sage"
         android:hint="@string/add_ingredient_quantity"
-        android:textColor="@android:color/black"
+        android:textColor="@color/pantry_text_primary"
+        android:textColorHint="@color/pantry_text_secondary"
         android:inputType="numberDecimal"
         android:singleLine="true"
         app:layout_constraintTop_toBottomOf="@+id/aei_name"
@@ -56,20 +61,23 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textColor="@android:color/black"
+        android:backgroundTint="@color/pantry_sage"
         android:entries="@array/measurement_units"
         android:contentDescription="@string/ingredient_unit"
         app:layout_constraintTop_toBottomOf="@id/aei_quantity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Optional Expiry Date Button -->
+    <!-- Expiry Date Picker Button -->
     <Button
         android:id="@+id/aei_expiry_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@color/pantry_green_light"
         android:text="@string/add_ingredient_expiry_date"
+        android:textSize="15sp"
+        android:textColor="@color/pantry_green_dark"
         app:layout_constraintTop_toBottomOf="@id/aei_unit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -80,7 +88,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:backgroundTint="@color/pantry_green"
         android:text="@string/save_ingredient"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/aei_expiry_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

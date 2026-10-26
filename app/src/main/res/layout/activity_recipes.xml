@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    android:background="@android:color/white"
+    android:background="@color/pantry_background"
     tools:context=".RecipesActivity" >
 
     <!-- Screen Heading -->
@@ -17,7 +17,7 @@
         android:text="@string/recipe_heading"
         android:textSize="28sp"
         android:textStyle="bold|italic"
-        android:textColor="#222222"
+        android:textColor="@color/pantry_green_dark"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -30,7 +30,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/recipe_description"
         android:textSize="14sp"
-        android:textColor="#666666"
+        android:textColor="@color/pantry_text_secondary"
         app:layout_constraintTop_toBottomOf="@id/txt_recipes_heading"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -52,7 +52,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/all_recipes_button" />
+            android:backgroundTint="@color/pantry_green"
+            android:text="@string/all_recipes_button"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:minWidth="0dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp" />
 
         <Button
             android:id="@+id/btn_suggested_recipes"
@@ -60,7 +67,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:text="@string/suggested_recipes_button" />
+            android:backgroundTint="@color/pantry_green"
+            android:text="@string/suggested_recipes_button"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:minWidth="0dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp" />
     </LinearLayout>
 
     <!-- Message Displayed When no Recipes are Available -->
@@ -72,7 +86,7 @@
         android:gravity="center"
         android:text="@string/recipe_empty"
         android:textSize="16sp"
-        android:textColor="#666666"
+        android:textColor="@color/pantry_text_secondary"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/layout_recipe_filters"
         app:layout_constraintBottom_toTopOf="@id/fragment_navigation"

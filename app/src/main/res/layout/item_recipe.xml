@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
+    app:cardBackgroundColor="@color/pantry_surface"
     app:cardCornerRadius="12dp"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true" >
@@ -13,17 +14,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp" >
+        android:padding="16dp"
+        android:background="@color/pantry_surface" >
 
+        <!-- Displaying the Ingredient Name -->
         <TextView
             android:id="@+id/item_recipe_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Recipe Name"
-            android:textColor="#222222"
-            android:textSize="18sp"
+            android:textColor="@color/pantry_green_dark"
+            android:textSize="19sp"
             android:textStyle="bold" />
 
+        <!-- Meal Photo to be Displayed -->
+        <ImageView
+            android:id="@+id/item_recipe_image"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginTop="12dp"
+            android:contentDescription="Recipe Meal Photo"
+            android:scaleType="centerCrop"
+            android:src="@drawable/pancakes" />
+
+        <!-- Displaying the Recipe Instructions -->
         <TextView
             android:id="@+id/item_recipe_instructions"
             android:layout_width="match_parent"
@@ -32,7 +46,7 @@
             android:maxLines="3"
             android:ellipsize="end"
             android:text="Recipe Instructions Appear Here."
-            android:textColor="#666666"
+            android:textColor="@color/pantry_text_secondary"
             android:textSize="14sp" />
 
     </LinearLayout>

@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.widget.TextView;
 import android.view.View;
 import android.widget.Toast;
+import android.content.SharedPreferences;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnAddIngredient;
     private RecyclerView rvPantry;
     private TextView txtEmptyPantry;
+    private TextView txtWelcomeBack;
 
     private DatabaseHelper databaseHelper;
 
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         btnAddIngredient = findViewById(R.id.add_ingredient);
         rvPantry = findViewById(R.id.rv_pantry);
         txtEmptyPantry = findViewById(R.id.p_empty_pantry);
+        txtWelcomeBack = findViewById(R.id.p_welcome_back);
 
         // Creating the database helper
         databaseHelper = new DatabaseHelper(this);
@@ -77,6 +81,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        // Reading the same preferences file used by SettingsActivity
+        SharedPreferences preferences = getSharedPreferences(
+                "SmartPantrySettings",
+                MODE_PRIVATE
+        );
+
+        // Retrieving the user's saved display name.
+        String userName = preferences.getString("profile_name", "").trim();
+
+        // Displaying a personalized greeting if a name has been saved.
+        if (userName.isEmpty()) {
+            txtWelcomeBack.setText("Welcome Back!");
+        } else {
+            txtWelcomeBack.setText("Welcome back, " + userName + "!");
+        }
 
         // Refreshing the list after returning from another Activity.
         if (databaseHelper != null && rvPantry != null) {
