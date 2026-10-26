@@ -446,4 +446,58 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         {"Salt", "1", "tsp"}
                 });
     }
+    // Retrieving all recipes stored in the database.
+    public List<Recipe> getAllRecipes() {
+        // Creating a list to store the retrieved recipes.
+        List<Recipe> recipes = new ArrayList<>();
+
+
+        // Opening the database for reading
+        SQLiteDatabase db = getReadableDatabase();
+
+        // Retrieving all recipes, sorted alphabetically by name.
+        Cursor cursor = db.query(
+                TABLE_RECIPES,
+                null,
+                null,
+                null,
+                null,
+                null,
+                COLUMN_RECIPE_NAME + " ASC"
+        );
+
+        try {
+            // Reading each recipe returned by the query.
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(
+                        cursor.getColumnIndexOrThrow(COLUMN_RECIPE_ID)
+                );
+
+                String name = cursor.getString(
+                        cursor.getColumnIndexOrThrow(COLUMN_RECIPE_NAME)
+                );
+
+                String instructions = cursor.getString(
+                        cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTIONS)
+                );
+
+                // Creating a Recipe object from the database row.
+                Recipe recipe = new Recipe(
+                        id,
+                        name,
+                        instructions
+                );
+
+                // Adding the recipe to the list.
+                recipes.add(recipe);
+            }
+        } finally {
+            // Closing the cursor after reading the results.
+            cursor.close();
+        }
+
+        // Returning the complete recipe list.
+        return recipes;
+    };
+
 }

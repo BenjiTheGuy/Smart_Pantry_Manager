@@ -38,4 +38,9 @@
     <string name="add_ingredient_quantity">Quantity</string>
     <string name="add_ingredient_expiry_date">Select Expiry Date</string>
     <string name="save_ingredient">Save Ingredient</string>
+
+    <!-- Recipes Screen -->
+    <string name="recipe_heading">Recipes</string>
+    <string name="recipe_description">Explore recipes and find meals to prepare.</string>
+    <string name="recipe_empty">No recipes available yet.</string>
 </resources>

@@ -15,7 +15,6 @@ import java.util.List;
 
 // Adapter responsible for displaying pantry ingredients.
 public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryViewHolder> {
-
     // List containing the pantry ingredients.
     private final List<PantryItem> pantryItems;
 
