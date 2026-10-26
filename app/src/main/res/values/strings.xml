@@ -43,4 +43,8 @@
     <string name="recipe_heading">Recipes</string>
     <string name="recipe_description">Explore recipes and find meals to prepare.</string>
     <string name="recipe_empty">No recipes available yet.</string>
+
+    <!-- Recipe Details Screen -->
+    <string name="ingredients_required">Required Ingredients</string>
+    <string name="ingredients_instructions">Preparation Instructions</string>
 </resources>

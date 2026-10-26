@@ -451,7 +451,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Creating a list to store the retrieved recipes.
         List<Recipe> recipes = new ArrayList<>();
 
-
         // Opening the database for reading
         SQLiteDatabase db = getReadableDatabase();
 
@@ -500,4 +499,51 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return recipes;
     };
 
+    // Retrieving all the required ingredients for a specific recipe.
+    public List<String> getRecipeIngredients(int recipeId) {
+        // Creating a list to store the retrieved ingredients.
+        List<String> ingredients = new ArrayList<>();
+
+        // Opening the database for reading
+        SQLiteDatabase db = getReadableDatabase();
+
+        // Retrieving all ingredients, sorted alphabetically by name.
+        Cursor cursor = db.query(
+                TABLE_RECIPE_INGREDIENTS,
+                new String[] {
+                        COLUMN_INGREDIENT_NAME,
+                        COLUMN_REQUIRED_QUANTITY,
+                        COLUMN_REQUIRED_UNIT
+                },
+                COLUMN_RECIPE_FOREIGN_ID + " = ?",
+                new String[]{String.valueOf(recipeId)},
+                null,
+                null,
+                COLUMN_INGREDIENT_NAME + " ASC"
+        );
+
+        try {
+            // Reading each recipe ingredients returned by the query.
+            while (cursor.moveToNext()) {
+                String name = cursor.getString(
+                        cursor.getColumnIndexOrThrow(COLUMN_INGREDIENT_NAME)
+                );
+
+                double quantity = cursor.getDouble(
+                        cursor.getColumnIndexOrThrow(COLUMN_REQUIRED_QUANTITY)
+                );
+
+                String unit = cursor.getString(
+                        cursor.getColumnIndexOrThrow(COLUMN_REQUIRED_UNIT)
+                );
+
+                ingredients.add(name + " - " + quantity + " " + unit);
+            }
+        } finally {
+             // Closing the cursor after reading the results.
+             cursor.close();
+        }
+        // Returning the complete ingredients list.
+        return ingredients;
+    }
 }

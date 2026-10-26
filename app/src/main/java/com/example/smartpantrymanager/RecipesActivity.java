@@ -4,6 +4,7 @@ package com.example.smartpantrymanager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -67,8 +68,24 @@ public class RecipesActivity extends AppCompatActivity {
             rvRecipes.setVisibility(View.VISIBLE);
             txtNoRecipes.setVisibility(View.GONE);
 
-            recipeAdapter = new RecipeAdapter(recipes);
+            // Creating the RecipeAdapter and defining what happens when a recipe is selected.
+            recipeAdapter = new RecipeAdapter(recipes, recipe -> {
+                // Creating an Intent to open up the Recipe Details screen.
+                Intent intent = new Intent(
+                        RecipesActivity.this,
+                        RecipeDetailActivity.class
+                );
 
+                // Passing the selected recipe details to retrieve the recipe's information.
+                intent.putExtra("recipe_id", recipe.getId());
+                intent.putExtra("recipe_name", recipe.getName());
+                intent.putExtra("recipe_instructions", recipe.getInstructions());
+
+                // Opening the Recipe Details screen.
+                startActivity(intent);
+            });
+
+            // Connecting the adapter to the RecycleView to display the recipes.
             rvRecipes.setAdapter(recipeAdapter);
         }
     }
